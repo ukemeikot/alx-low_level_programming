@@ -9,12 +9,12 @@ int main(void)
 {
 	int n, m, o;
 
-for (o = 0; 0 <= 9; o++)
-{
-	for (n = o + 1; o <= 9; o++)
+	for (o = 0; o <= 9; o++)
 	{
-		for (m = n + 1; m < 10; m++)
+	for (n = o + 1; o <= 9; o++)
 		{
+		for (m = n + 1; m < 10; m++)
+			{
 			putchar((o % 10) + '0');
 			putchar((n % 10) + '0');
 			putchar((m % 10) + '0');
@@ -23,9 +23,9 @@ for (o = 0; 0 <= 9; o++)
 			putchar(',');
 			putchar(' ');
 
+			}
 		}
 	}
-}
 	putchar('\n');
 	return (0);
 }
