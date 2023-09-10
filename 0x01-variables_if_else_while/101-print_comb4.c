@@ -9,9 +9,9 @@ int main(void)
 {
 	int n, m, o;
 
-	for (o = 0; o <= 9; o++)
+	for (o = 0; o <= 7; o++)
 	{
-	for (n = o + 1; o <= 9; o++)
+	for (n = o + 1; o <= 8; o++)
 		{
 		for (m = n + 1; m < 10; m++)
 			{
