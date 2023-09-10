@@ -18,7 +18,7 @@ int main(void)
 			putchar((o % 10) + '0');
 			putchar((n % 10) + '0');
 			putchar((m % 10) + '0');
-			if (0 == 7 && n == 8 && m == 9)
+			if (o == 7 && n == 8 && m == 9)
 				continue;
 			putchar(',');
 			putchar(' ');
