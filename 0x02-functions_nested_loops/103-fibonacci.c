@@ -20,5 +20,6 @@ int main(void)
 		++n;
 	}
 	printf("%ld", sum);
+	printf("\n");
 	return (0);
 }
