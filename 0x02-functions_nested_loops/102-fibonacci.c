@@ -24,7 +24,7 @@ int main(void)
 			b = a - b;
 			printf(", %ld", b);
 		}
-		n++;
+		++n;
 	}
 	printf("\n");
 	return (0);
