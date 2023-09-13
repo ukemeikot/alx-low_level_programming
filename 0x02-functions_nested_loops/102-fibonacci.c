@@ -20,8 +20,8 @@ int main(void)
 		}
 		else
 		{
-			a += b;
-			b = a - b;
+			b += a;
+			a = b - a;
 			printf(", %ld", b);
 		}
 		++n;
