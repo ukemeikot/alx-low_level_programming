@@ -1,5 +1,5 @@
 #include "main.h"
-i
+
 /**
   * cap_string - The main  function
   *
