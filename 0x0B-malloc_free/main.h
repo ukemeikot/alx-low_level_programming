@@ -10,4 +10,5 @@ char **strtow(char *str);
 #include <stdio.h>
 int _putchar(char c);
 #include <stdlib.h>
+#include <string.h>
 #endif
