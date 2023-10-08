@@ -2,11 +2,11 @@
 unsigned int _strlen(char *s);
 char *_strncpy(char *dest, char *src, unsigned int n);
 /**
- * string_ncncat - function to concatenate two strings
+ * string_nconcat - function to concatenate two strings
  * @s1: string 1
  * @s2: string 2
  * @n: size of two to be copied to one
- * Return: pointer to a nely allocated space in memory coontaining the new 
+ * Return: pointer to a nely allocated space in memory coontaining the new
  * string
  */
 
@@ -33,7 +33,7 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	_strncpy(concatedstring, s1, len1);
 	_strncpy((concatedstring + len1), s2, n);
 	return (concatedstring);
-	
+
 }
 
 /**
