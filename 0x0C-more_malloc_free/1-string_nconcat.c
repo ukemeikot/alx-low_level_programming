@@ -1,83 +1,45 @@
 #include "main.h"
-unsigned int _strlen(char *s);
-char *_strncpy(char *dest, char *src, unsigned int n);
-/**
- * string_nconcat - function to concatenate two strings
- * @s1: string 1
- * @s2: string 2
- * @n: size of two to be copied to one
- * Return: pointer to a nely allocated space in memory coontaining the new
- * string
- */
 
+/**
+ * *string_nconcat - concatenates n bytes of a string to another string
+ * @s1: string to append to
+ * @s2: string to concatenate from
+ * @n: number of bytes from s2 to concatenate to s1
+ *
+ * Return: pointer to the resulting string
+ */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *concatedstring;
-	unsigned int len1, len2;
+	char *s;
+	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
 
-	if (s1 == NULL)
-		s1 = "";
-	if (s2 == NULL)
-		s2 = "";
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	if (n >= len2)
-	{
-		n = len2;
-	}
+	while (s1 && s1[len1])
+		len1++;
+	while (s2 && s2[len2])
+		len2++;
+
 	if (n < len2)
-	{
-		concatedstring = malloc((len1 + n + 1) * sizeof(char));
-	}
+		s = malloc(sizeof(char) * (len1 + n + 1));
 	else
-	{
-		concatedstring = malloc((len1 + len2 + 1) * sizeof(char));
-	}
-	if (concatedstring == NULL)
-	{
+		s = malloc(sizeof(char) * (len1 + len2 + 1));
+
+	if (!s)
 		return (NULL);
-	}
-	_strncpy(concatedstring, s1, len1);
-	_strncpy((concatedstring + len1), s2, n);
-	return (concatedstring);
 
-}
-
-/**
- * _strlen - returns the length of a string
- * @s: the character holder
- * Return: the string length
- */
-unsigned int _strlen(char *s)
-{
-	int count = 0;
-
-	while (*s != '\0')
+	while (i < len1)
 	{
-		count++;
-		s++;
+		s[i] = s1[i];
+		i++;
 	}
-		return (count);
-}
-/**
- * _strncpy - function that cpopies strings in c
- * @dest: destination string
- * @src: source string
- * @n: the number of charcters in the string to be copied
- * Return: the destination string
- */
 
-char *_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int i;
-		for (i = 0; (i < n && src[i] != '\0'); i++)
-		{
-			dest[i] = src[i];
-		}
-		while (i < n)
-		{
-			dest[i] = '\0';
-			i++;
-		}
-	return (dest);
+	while (n < len2 && i < (len1 + n))
+		s[i++] = s2[j++];
+
+	while (n >= len2 && i < (len1 + len2))
+		s[i++] = s2[j++];
+
+	s[i] = '\0';
+
+	return (s);
 }
+
