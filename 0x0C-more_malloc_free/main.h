@@ -11,4 +11,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 int isNumeric(char *str);
 int _isdigit(int c);
 int _atoi(char *s);
+int _strlen(char *s);
+int _putchar(char c);
+void errors(void);
 #endif

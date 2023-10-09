@@ -8,24 +8,48 @@
 
 int main(int argc, char *argv[])
 {
-	int n1, n2, multiple;
+	char *s1, *s2;
+	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
 
-	if (argc != 3)
+	s1 = argv[1], s2 = argv[2];
+	if (argc != 3 || !isNumeric(s1) || !isNumeric(s2))
+		errors();
+	len1 = _strlen(s1);
+	len2 = _strlen(s2);
+	len = len1 + len2 + 1;
+	result = malloc(sizeof(int) * len);
+	if (!result)
+		return (1);
+	for (i = 0; i <= len1 + len2; i++)
+		result[i] = 0;
+	for (len1 = len1 - 1; len1 >= 0; len1--)
 	{
-		printf("Erro\n");
-		return (98);
+		digit1 = s1[len1] - '0';
+		carry = 0;
+		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		{
+			digit2 = s2[len2] - '0';
+			carry += result[len1 + len2 + 1] + (digit1 * digit2);
+			result[len1 + len2 + 1] = carry % 10;
+			carry /= 10;
+		}
+		if (carry > 0)
+			result[len1 + len2 + 1] += carry;
 	}
-	if (!isNumeric(argv[1]) || !isNumeric(argv[2]))
+	for (i = 0; i < len - 1; i++)
 	{
-		printf("Error\n");
-		return (98);
+		if (result[i])
+			a = 1;
+		if (a)
+			_putchar(result[i] + '0');
 	}
-	n1 = _atoi(argv[1]);
-	n2 = _atoi(argv[2]);
-	multiple = n1 * n2;
-	printf("%d\n", multiple);
+	if (!a)
+		_putchar('0');
+	_putchar('\n');
+	free(result);
 	return (0);
 }
+
 /**
  * isNumeric - checks for numeric arguments
  * @str: the string passed to it
@@ -56,46 +80,28 @@ int _isdigit(int c)
 		return (0);
 }
 /**
- * _atoi - converts a string to an integer
- * @s: string to be converted
+ * _strlen - returns the length of a string
+ * @s: string to evaluate
  *
- * Return: the int converted from the string
+ * Return: the length of the string
  */
-int _atoi(char *s)
+int _strlen(char *s)
 {
-	int i, d, n, len, f, digit;
+	int i = 0;
 
-	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
-
-	while (s[len] != '\0')
-	len++;
-
-	while (i < len && f == 0)
+	while (s[i] != '\0')
 	{
-	if (s[i] == '-')
-	++d;
-
-	if (s[i] >= '0' && s[i] <= '9')
-	{
-	digit = s[i] - '0';
-	if (d % 2)
-	digit = -digit;
-	n = n * 10 + digit;
-	f = 1;
-	if (s[i + 1] < '0' || s[i + 1] > '9')
-	break;
-	f = 0;
+		i++;
 	}
-	i++;
-	}
-
-	if (f == 0)
-	return (0);
-
-	return (n);
+	return (i);
 }
+/**
+ * errors - return the value for all errors
+ * Return: nothing
+ */
+void errors(void)
+{
+		printf("Error\n");
+			exit(98);
+}
+
