@@ -1,98 +1,100 @@
-#define ERR_MSG "Error"
-
+#include "main.h"
 /**
- * is_digit - checks if a string contains a non-digit char
- * @s: string to be evaluated
- *
- * Return: 0 if a non-digit is found, 1 otherwise
+ * main - this function multiplies two intergers
+ * @argc: the arguments count
+ * @argv: the arguments vector
+ * Return: 0 on success
  */
-int is_digit(char *s)
-{
-	int i = 0;
 
-	while (s[i])
+int main(int argc, char *argv[])
+{
+	int n1, n2, multiple;
+	if (argc != 3)
 	{
-		if (s[i] < '0' || s[i] > '9')
+		printf("Erro\n");
+		return (98);
+	}
+	if (!isNumeric(argv[1]) || !isNumeric(argv[2]))
+	{
+		printf("Error\n");
+		return (98);
+	}
+	n1 = _atoi(argv[1]);
+	n2 = _atoi(argv[2]);
+	multiple = n1 * n2;
+	printf("%d\n", multiple);
+	return (0);
+}
+/**
+ * isNumeric - checks for numeric arguments
+ * @str: the string passed to it
+ * Return: 1 for Numeric and 0 otherwise
+ */
+
+int isNumeric(char *str)
+{
+	while (*str)
+	{
+		if (!_isdigit(*str))
 			return (0);
-		i++;
+		str++;
 	}
 	return (1);
 }
-
 /**
- * _strlen - returns the length of a string
- * @s: string to evaluate
- *
- * Return: the length of the string
+ * _isdigit - checks for digits
+ * @c: holds the digit to be checked
+ * Return: 1 if digit and 0 otherwise
  */
-int _strlen(char *s)
+
+int _isdigit(int c)
 {
-	int i = 0;
-
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-/**
- * errors - handles errors for main
- */
-void errors(void)
-{
-	printf("Error\n");
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: array of arguments
- *
- * Return: always 0 (Success)
- */
-int main(int argc, char *argv[])
-{
-	char *s1, *s2;
-	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
-
-	s1 = argv[1], s2 = argv[2];
-	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
-		errors();
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	len = len1 + len2 + 1;
-	result = malloc(sizeof(int) * len);
-	if (!result)
+	if (c >= 48 && c <= 57)
 		return (1);
-	for (i = 0; i <= len1 + len2; i++)
-		result[i] = 0;
-	for (len1 = len1 - 1; len1 >= 0; len1--)
-	{
-		digit1 = s1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
-		{
-			digit2 = s2[len2] - '0';
-			carry += result[len1 + len2 + 1] + (digit1 * digit2);
-			result[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
-		}
-		if (carry > 0)
-			result[len1 + len2 + 1] += carry;
-	}
-	for (i = 0; i < len - 1; i++)
-	{
-		if (result[i])
-			a = 1;
-		if (a)
-			_putchar(result[i] + '0');
-	}
-	if (!a)
-		_putchar('0');
-	_putchar('\n');
-	free(result);
-	return (0);
+	else
+		return (0);
 }
+/**
+ * _atoi - converts a string to an integer
+ * @s: string to be converted
+ *
+ * Return: the int converted from the string
+ */
+int _atoi(char *s)
+{
+	int i, d, n, len, f, digit;
 
+	i = 0;
+	d = 0;
+	n = 0;
+	len = 0;
+	f = 0;
+	digit = 0;
+
+	while (s[len] != '\0')
+	len++;
+
+	while (i < len && f == 0)
+	{
+	if (s[i] == '-')
+	++d;
+
+	if (s[i] >= '0' && s[i] <= '9')
+	{
+	digit = s[i] - '0';
+	if (d % 2)
+	digit = -digit;
+	n = n * 10 + digit;
+	f = 1;
+	if (s[i + 1] < '0' || s[i + 1] > '9')
+	break;
+	f = 0;
+	}
+	i++;
+	}
+
+	if (f == 0)
+	return (0);
+
+	return (n);
+}
