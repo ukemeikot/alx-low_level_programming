@@ -9,6 +9,7 @@
 int main(int argc, char *argv[])
 {
 	int n1, n2, multiple;
+
 	if (argc != 3)
 	{
 		printf("Erro\n");
