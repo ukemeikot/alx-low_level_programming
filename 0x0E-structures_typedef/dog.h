@@ -1,4 +1,4 @@
-#ifndef DO_H
+#ifndef DOG_H
 #define DOG_H
 /**
  * struct dog - structure to hold the attributes of dogs
