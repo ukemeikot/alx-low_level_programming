@@ -17,4 +17,8 @@ void init_dog(struct dog *d, char *name, float age, char *owner);
 #include <stdio.h>
 #include <string.h>
 void print_dog(struct dog *d);
+/**
+ * dog_t - typedef for the dog structure
+ */
+#typedef struct dog dog_t
 #endif
