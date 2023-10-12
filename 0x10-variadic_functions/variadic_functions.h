@@ -11,12 +11,13 @@ typedef void (*print_function)(va_list args);
 /**
  * struct format_mapping - structure to map the format
  * @format: the format specifier passed.
- * @printer: the function to print the result
+ * @print_function: the function to print the result
  */
-struct format_mapping
+typedef struct format_mapping
 {
-	char format;
+	char *format;
 	print_function printer;
-};
+} fm;
+
 #include <stdio.h>
 #endif

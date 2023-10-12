@@ -3,16 +3,7 @@ void print_int(va_list args);
 void print_char(va_list args);
 void print_float(va_list args);
 void print_string(va_list args);
-/**
-* struct format_mapping - maps the format for printing
-* @format_map - the format structure
-*/
-struct format_mapping format_map[] = {
-	{'c', print_char},
-	{'i', print_int},
-	{'f', print_float},
-	{'s', print_string},
-	};
+
 /**
  * print_all - this function prints anything
  * @format: the format string
@@ -24,6 +15,13 @@ void print_all(const char * const format, ...)
 	size_t i;
 	va_list args;
 	char *separator = "";
+	fm format_map[] = {
+	{"c", print_char},
+	{"i", print_int},
+	{"f", print_float},
+	{"s", print_string},
+	{NULL, NULL}
+	};
 
 	va_start(args, format);
 	while (current_format && current_format[0])
@@ -31,7 +29,7 @@ void print_all(const char * const format, ...)
 		i = 0;
 		while (i < 4)
 		{
-			if (current_format[0] == format_map[i].format)
+			if (current_format[0] == *(format_map[i].format))
 			{
 				printf("%s", separator);
 				format_map[i].printer(args);
