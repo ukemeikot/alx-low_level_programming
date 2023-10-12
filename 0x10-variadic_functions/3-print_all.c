@@ -28,7 +28,8 @@ void print_all(const char * const format, ...)
 	va_start(args, format);
 	while (current_format && current_format[0])
 	{
-		for (i = 0; i < sizeof(format_map) / sizeof(format_map[0]); i++)
+		i = 0;
+		while (i < 4 )
 		{
 			if (current_format[0] == format_map[i].format)
 			{
@@ -37,6 +38,7 @@ void print_all(const char * const format, ...)
 				separator = ", ";
 				break;
 			}
+			i++;
 		}
 		current_format++;
 	}
