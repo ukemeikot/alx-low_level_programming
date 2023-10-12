@@ -29,7 +29,7 @@ void print_all(const char * const format, ...)
 	while (current_format && current_format[0])
 	{
 		i = 0;
-		while (i < 4 )
+		while (i < 4)
 		{
 			if (current_format[0] == format_map[i].format)
 			{
