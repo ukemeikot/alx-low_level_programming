@@ -5,12 +5,13 @@ void print_float(va_list args);
 void print_string(va_list args);
 /**
 * struct format_mapping - maps the format for printing
+* @format_map - the format structure
 */
 struct format_mapping format_map[] = {
 	{'c', print_char},
 	{'i', print_int},
 	{'f', print_float},
-	{'s', print_string}
+	{'s', print_string},
 	};
 /**
  * print_all - this function prints anything
@@ -49,9 +50,7 @@ void print_all(const char * const format, ...)
 */
 void print_char(va_list args)
 {
-	char c = va_arg(args, int);
-
-	printf("%c", c);
+	printf("%c", va_arg(args, int));
 }
 /**
 *print_string - prints strings to the screen
@@ -62,14 +61,8 @@ void print_string(va_list args)
 {
 	char *s = va_arg(args, char *);
 
-	if (s == NULL)
-	{
-		printf("(nil)");
-	}
-	else
-	{
-		printf("%s", s);
-	}
+	s = (s != NULL) ? s : "(nil)";
+	printf("%s", s);
 }
 /**
 *print_float - prints float to the screen
@@ -78,9 +71,7 @@ void print_string(va_list args)
 */
 void print_float(va_list args)
 {
-	double d = va_arg(args, double);
-
-	printf("%f", d);
+	printf("%f", va_arg(args, double));
 }
 /**
 *print_int - prints an integer
@@ -89,7 +80,5 @@ void print_float(va_list args)
 */
 void print_int(va_list args)
 {
-	int i = va_arg(args, int);
-
-		printf("%d", i);
+		printf("%d", va_arg(args, int));
 }
