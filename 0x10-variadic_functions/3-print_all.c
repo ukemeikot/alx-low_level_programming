@@ -4,6 +4,15 @@ void print_char(va_list args);
 void print_float(va_list args);
 void print_string(va_list args);
 /**
+* struct format_mapping - maps the format for printing
+*/
+struct format_mapping format_map[] = {
+	{'c', print_char},
+	{'i', print_int},
+	{'f', print_float},
+	{'s', print_string}
+	};
+/**
  * print_all - this function prints anything
  * @format: the format string
  * Return: notning
@@ -14,19 +23,13 @@ void print_all(const char * const format, ...)
 	size_t i;
 	va_list args;
 	char *separator = "";
-	struct format_mapping format_map[] = {
-	{'c', print_char},
-	{'i', print_int},
-	{'f', print_float},
-	{'s', print_string},
-	};
-	
+
 	va_start(args, format);
-	while (current_format && current_format[0]) 
+	while (current_format && current_format[0])
 	{
-		for (i = 0; i < sizeof(format_map) / sizeof(format_map[0]); i++) 
+		for (i = 0; i < sizeof(format_map) / sizeof(format_map[0]); i++)
 		{
-			if (current_format[0] == format_map[i].format) 
+			if (current_format[0] == format_map[i].format)
 			{
 				printf("%s", separator);
 				format_map[i].printer(args);
@@ -40,8 +43,19 @@ void print_all(const char * const format, ...)
 	printf("\n");
 }
 /**
+*print_char - prints a character
+*@args: the variable list arguments
+*Return: nothing
+*/
+void print_char(va_list args)
+{
+	char c = va_arg(args, int);
+
+	printf("%c", c);
+}
+/**
 *print_string - prints strings to the screen
-*args: argument passed to the string
+*@args: argument passed to the string
 *Return: nothing
 */
 void print_string(va_list args)
@@ -77,16 +91,5 @@ void print_int(va_list args)
 {
 	int i = va_arg(args, int);
 
-	printf("%d", i);
-}
-/**
-*print_char - prints a character
-*@args: the variable list arguments
-*Return: nothing
-*/
-void print_char(va_list args)
-{
-	char c = va_arg(args, int);
-
-	printf("%c", c);
+		printf("%d", i);
 }
