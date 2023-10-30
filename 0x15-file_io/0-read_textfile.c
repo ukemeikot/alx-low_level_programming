@@ -13,32 +13,24 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	FILE *myfile;
+	int file_D;
 	char *store;
 	size_t readsize;
 	size_t writesize;
 
 	if (filename == NULL)
 		return (0);
-	myfile = fopen(filename, "r");
-	store = malloc(letters + 1);
+	file_D = open(filename, O_RDONLY);
+	store = malloc(sizeof(char) * letters);
+	if (file_D == -1)
+	{
+		return (0);
+	}
 	if (store == NULL)
-	{
-		fclose(myfile);
 		return (0);
-	}
-	readsize = fread(store, 1, letters, myfile);
-	if (readsize <= 0)
-	{
-		fclose(myfile);
-		free(store);
-		return (0);
-	}
-	store[readsize] = '\0';
-	writesize = fwrite(store, 1, readsize, stdout);
-	if (writesize != readsize)
-	{
-		return (0);
-	}
+	readsize = read(file_D, store, letters);
+	writesize = write(STDOUT_FILENO, store, readsize);
+	close(file_D);
+	free(store);
 	return ((ssize_t)writesize);
 }
