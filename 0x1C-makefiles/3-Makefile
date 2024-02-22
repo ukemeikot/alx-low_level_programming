@@ -1,0 +1,37 @@
+# the compiler flag
+CC = gcc
+
+# the source files
+SRC = main.c school.c
+
+# extracting object files from source files
+OBJ = $(SRC:.c=.o)
+
+# name of the executable
+NAME = school
+
+# program to delete files
+RM = rm -f
+
+# rules for all target
+all: $(NAME)
+
+# rules for generating executable by linking all object files
+$(NAME): $(OBJ)
+	$(CC) -o $@ $^
+
+# rules for cleaning
+clean:
+	$(RM) *~ $(NAME)
+oclean:
+	$(RM) $(OBJ)
+# rules for deleting emacs temp. and object and executables.
+fclean: clean oclean
+
+# rules for recompiling
+re: fclean all
+
+%.o: %.c
+	$(CC) -c -o $@ $<
+
+.PHONY: all clean oclean fclean re
