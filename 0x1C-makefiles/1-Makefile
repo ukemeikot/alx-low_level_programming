@@ -5,6 +5,6 @@ all: school
 CC = gcc
 SRC = main.c school.c
 
-# school target dependencies
+# school target dependensies
 school: main.c school.c
-	$(CC) $(SRC) -0 school
+	$(CC) $(SRC) -o school
