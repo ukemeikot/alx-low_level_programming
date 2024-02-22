@@ -1,10 +1,10 @@
-# defining the rule
+# all rule target
 all: school
 
-# defining the variables
+# variables
 CC = gcc
 SRC = main.c school.c
 
-# defining the dependencies
+# school target dependencies
 school: main.c school.c
 	$(CC) $(SRC) -0 school
