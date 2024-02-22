@@ -1,5 +1,6 @@
 # defining the rule
 all: school
+
 # defining the variables
 CC = gcc
 SRC = main.c school.c
